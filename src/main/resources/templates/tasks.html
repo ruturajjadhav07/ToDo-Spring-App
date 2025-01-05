@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO List</title>
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: bisque;
+        height: 100vh;
+      }
+      .container {
+        border: 2px solid #ccc;
+        padding: 30px;
+        border-radius: 8px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin-top: 50px;
+      }
+      .text-line {
+        text-decoration: line-through;
+        color: red;
+      }
+      .task-item {
+        margin-bottom: 15px;
+      }
+      .task-title {
+        flex-grow: 1;
+      }
+      .task-actions {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center">ToDo Application</h1>
+      <div>
+        <form action="/" method="POST">
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="Add Task"
+              name="title"
+              class="form-control"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Add Task
+          </button>
+        </form>
+      </div>
+
+      <div class="mt-4">
+        <!-- Table for displaying tasks -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="text-left">#</th>
+              <th scope="col" class="text-left">Task</th>
+              <th scope="col" class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <th:block th:each="task : ${tasks}">
+              <tr>
+                <td th:text="${task.id}" class="text-left"></td>
+                <td th:text="${task.title}" class="text-left"></td>
+                <td class="text-right">
+                  <a
+                    th:href="@{/{id}/delete(id=${task.id})}"
+                    class="btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </a>
+                </td>
+              </tr>
+            </th:block>
+          </tbody>
+        </table>
+
+        <p
+          th:if="${tasks == null or #lists.isEmpty(tasks)}"
+          class="text-center text-muted"
+        >
+          No tasks available.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional for interactive elements) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
