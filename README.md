@@ -63,7 +63,18 @@ CREATE TABLE task (
     title VARCHAR(255) NOT NULL
 );
 ```
-**Step 3**: Configure MySQL credentials in **application.properties**.
+**Step 3**: **Configure `application.properties`** in  `src/main/resources/application.properties` file.
+```properties
+   
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/DatabaseName
+spring.datasource.username=root
+spring.datasource.password=password
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+
+
+```
 ### 4. **Build and Run the Application**
 ```bash
   mvn clean install
